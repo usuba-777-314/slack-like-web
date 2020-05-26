@@ -35,6 +35,7 @@ export default {
 
   .workspace {
     flex: 1 1 0;
+    overflow: hidden;
   }
 }
 
