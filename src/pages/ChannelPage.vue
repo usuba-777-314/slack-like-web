@@ -1,5 +1,10 @@
 <template>
-  <ChannelTemplate :messages="messages" />
+  <ChannelTemplate
+    :messages="messages"
+    :form="messageForm"
+    @sendMessage="sendMessage"
+    @updateMessageFormText="setMessageFormText({ text: $event })"
+  />
 </template>
 
 <script>
@@ -17,11 +22,15 @@ export default {
   },
 
   methods: {
-    ...mapActions('pages/channel', ['queryMessages'])
+    ...mapActions('pages/channel', [
+      'queryMessages',
+      'sendMessage',
+      'setMessageFormText'
+    ])
   },
 
   computed: {
-    ...mapState('pages/channel', ['messages'])
+    ...mapState('pages/channel', ['messages', 'messageForm'])
   }
 };
 </script>
