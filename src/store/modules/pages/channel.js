@@ -27,9 +27,11 @@ const actions = {
   async sendMessage({ state, commit }) {
     const { messages, messageForm } = state;
     const { text } = messageForm;
-    const timestamp = Date.now()
 
-    commit('messages', { messages: messages.concat({ text, timestamp }) });
+    const data = { text };
+    const message = await dao.message.send(data);
+
+    commit('messages', { messages: messages.concat(message) });
     commit('messageFormText', { text: '' });
   },
 
