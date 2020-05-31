@@ -1,6 +1,11 @@
 <template>
   <ol class="message-list">
-    <MessageListItem v-for="message in messages" :key="message.id" :message="message" />
+    <MessageListItem
+      v-for="message in messages"
+      :key="message.id"
+      :message="message"
+      @deleteMessage="deleteMessage"
+    />
   </ol>
 </template>
 
@@ -17,6 +22,12 @@ export default {
       type: Array,
       required: true
     }
+  },
+
+  methods: {
+    deleteMessage(message) {
+      this.$emit('deleteMessage', message);
+    }
   }
 };
 </script>
@@ -25,7 +36,7 @@ export default {
 .message-list {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 24px 0 0;
 
   overflow: scroll;
 }

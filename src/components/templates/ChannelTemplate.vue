@@ -1,6 +1,6 @@
 <template>
   <div class="channel-template">
-    <MessageList :messages="messages" />
+    <MessageList :messages="messages" @deleteMessage="deleteMessage" />
 
     <MessageForm
       :form="form"
@@ -34,6 +34,10 @@ export default {
   },
 
   methods: {
+    deleteMessage(message) {
+      this.$emit('deleteMessage', message);
+    },
+
     updateMessageFormText(formMessage) {
       this.$emit('updateMessageFormText', formMessage);
     },

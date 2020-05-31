@@ -35,6 +35,11 @@ const actions = {
     commit('messageFormText', { text: '' });
   },
 
+  async deleteMessage({ dispatch }, { message }) {
+    await dao.message.delete(message.id);
+    await dispatch('queryMessages');
+  },
+
   async setMessageFormText({ commit }, { text }) {
     commit('messageFormText', { text });
   }

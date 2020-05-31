@@ -11,5 +11,9 @@ export default {
     const data = { message };
     const response = await api.post('messages', data);
     return response.data.message;
+  },
+
+  async delete(id) {
+    await api.delete(`messages/${id}`);
   }
 }
