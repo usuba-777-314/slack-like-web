@@ -44,7 +44,7 @@ const actions = {
 
   async queryMessages({ state, commit }) {
     const { channelId } = state;
-    const { messages } = await dao.message.query_to_channel(channelId);
+    const { messages } = await dao.message.queryToChannel(channelId);
     commit("messages", { messages });
   }
 };
