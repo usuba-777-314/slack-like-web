@@ -3,7 +3,10 @@ import dao from "@/dao";
 const state = {
   channelId: null,
   channel: {},
-  messages: []
+  messages: [],
+  messageForm: {
+    text: ""
+  }
 };
 
 const getters = {
@@ -14,6 +17,10 @@ const getters = {
   messages({ messages }) {
     const copy = Object.assign([], messages);
     return copy.reverse();
+  },
+
+  messageForm({ messageForm }) {
+    return messageForm;
   }
 };
 
@@ -28,6 +35,14 @@ const mutations = {
 
   messages(state, { messages }) {
     state.messages = messages;
+  },
+
+  messageFormText({ messageForm }, { text }) {
+    messageForm.text = text;
+  },
+
+  addMessage(state, { message }) {
+    state.messages = [message].concat(state.messages);
   }
 };
 
@@ -46,6 +61,22 @@ const actions = {
     const { channelId } = state;
     const { messages } = await dao.message.queryToChannel(channelId);
     commit("messages", { messages });
+  },
+
+  async setMessageFormText({ commit }, { text }) {
+    commit("messageFormText", { text });
+  },
+
+  async sendMessage({ state, commit }) {
+    const { channelId, messageForm } = state;
+    const { text } = messageForm;
+
+    commit("messageFormText", { text: "" });
+
+    const data = { channelId, text };
+    const { message } = await dao.message.sendToChannel(data);
+
+    commit("addMessage", { message });
   }
 };
 

@@ -1,5 +1,11 @@
 <template>
-  <ChannelTemplate :channel="channel" :messages="messages" />
+  <ChannelTemplate
+    :channel="channel"
+    :messages="messages"
+    :form="messageForm"
+    @sendMessage="sendMessage"
+    @updateMessageFormText="setMessageFormText({ text: $event })"
+  />
 </template>
 
 <script>
@@ -20,7 +26,11 @@ export default {
   },
 
   computed: {
-    ...mapGetters("pages/client/channel", ["channel", "messages"])
+    ...mapGetters("pages/client/channel", [
+      "channel",
+      "messages",
+      "messageForm"
+    ])
   },
 
   async created() {
@@ -33,7 +43,9 @@ export default {
     ...mapActions("pages/client/channel", [
       "setChannelId",
       "fetchChannel",
-      "queryMessages"
+      "queryMessages",
+      "setMessageFormText",
+      "sendMessage"
     ])
   }
 };
