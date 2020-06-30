@@ -7,12 +7,9 @@ export default {
     return response.data;
   },
 
-  // eslint-disable-next-line no-unused-vars
   async sendToChannel({ channelId, text }) {
-    const message = { text };
-    message.id = Date.now();
-    message.timestamp = Date.now();
-    message.user = { name: "Test" };
-    return { message };
+    const data = { channelId, text };
+    const response = await api.post("messages", data);
+    return response.data;
   }
 };
