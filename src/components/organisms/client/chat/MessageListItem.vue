@@ -13,13 +13,25 @@
 
       <div class="text">{{ message.text }}</div>
     </div>
+
+    <div class="action-menu">
+      <UiButton @click="deleteMessage">
+        <i class="material-icons">delete</i>
+      </UiButton>
+    </div>
   </li>
 </template>
 
 <script>
 import moment from "moment";
 
+import UiButton from "@/components/atoms/UiButton";
+
 export default {
+  components: {
+    UiButton
+  },
+
   props: {
     message: {
       type: Object,
@@ -31,6 +43,12 @@ export default {
     timestamp() {
       return moment(this.message.timestamp).format("YYYY/MM/DD HH:mm");
     }
+  },
+
+  methods: {
+    deleteMessage() {
+      this.$emit("deleteMessage", this.message);
+    }
   }
 };
 </script>
@@ -38,11 +56,24 @@ export default {
 <style lang="scss" scoped>
 .message-list-item {
   display: flex;
+  position: relative;
 
   padding: 8px 20px;
 
+  .action-menu {
+    position: absolute;
+    top: -16px;
+    right: 17px;
+    z-index: 2;
+    visibility: hidden;
+  }
+
   &:hover {
     background-color: rgba(238, 238, 238, 0.5);
+
+    .action-menu {
+      visibility: visible;
+    }
   }
 }
 
@@ -84,5 +115,13 @@ export default {
   white-space: pre-wrap;
   word-break: break-word;
   overflow-wrap: break-word;
+}
+
+.action-menu {
+  display: flex;
+  border-radius: 6px;
+  padding: 2px;
+  background: white;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.28);
 }
 </style>

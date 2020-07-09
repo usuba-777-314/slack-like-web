@@ -11,5 +11,10 @@ export default {
     const data = { channelId, text };
     const response = await api.post("messages", data);
     return response.data;
+  },
+
+  // eslint-disable-next-line no-unused-vars
+  async delete(id) {
+    // 何もしない
   }
 };

@@ -4,6 +4,7 @@
       v-for="message in messages"
       :key="message.id"
       :message="message"
+      @deleteMessage="deleteMessage"
     />
   </ol>
 </template>
@@ -42,6 +43,10 @@ export default {
   },
 
   methods: {
+    deleteMessage(message) {
+      this.$emit("deleteMessage", message);
+    },
+
     scrollToBottom() {
       requestAnimationFrame(() => {
         this.$el.scrollTop = this.$el.scrollHeight - this.$el.clientHeight;
@@ -55,7 +60,7 @@ export default {
 .message-list {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 24px 0 0;
 
   display: flex;
   flex-direction: column;

@@ -43,6 +43,10 @@ const mutations = {
 
   addMessage(state, { message }) {
     state.messages = [message].concat(state.messages);
+  },
+
+  deleteMessage(state, { message }) {
+    state.messages = state.messages.filter(m => m.id !== message.id);
   }
 };
 
@@ -77,6 +81,11 @@ const actions = {
     const { message } = await dao.message.sendToChannel(data);
 
     commit("addMessage", { message });
+  },
+
+  async deleteMessage({ commit }, { message }) {
+    await dao.message.delete(message.id);
+    commit("deleteMessage", { message });
   }
 };
 

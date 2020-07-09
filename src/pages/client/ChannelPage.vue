@@ -4,6 +4,7 @@
     :messages="messages"
     :form="messageForm"
     @sendMessage="sendMessage"
+    @deleteMessage="deleteMessage({ message: $event })"
     @updateMessageFormText="setMessageFormText({ text: $event })"
   />
 </template>
@@ -57,7 +58,8 @@ export default {
       "fetchChannel",
       "queryMessages",
       "setMessageFormText",
-      "sendMessage"
+      "sendMessage",
+      "deleteMessage"
     ])
   }
 };
