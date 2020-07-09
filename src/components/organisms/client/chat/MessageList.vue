@@ -23,8 +23,16 @@ export default {
     }
   },
 
+  computed: {
+    latestTimestamp() {
+      if (this.messages.length === 0) return null;
+      return this.messages[this.messages.length - 1].timestamp;
+    }
+  },
+
   watch: {
-    messages() {
+    latestTimestamp(after, before) {
+      if (after <= before) return;
       this.scrollToBottom();
     }
   },

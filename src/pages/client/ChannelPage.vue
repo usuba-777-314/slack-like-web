@@ -25,6 +25,12 @@ export default {
     }
   },
 
+  data() {
+    return {
+      intervalId: null
+    };
+  },
+
   computed: {
     ...mapGetters("pages/client/channel", [
       "channel",
@@ -37,6 +43,12 @@ export default {
     this.setChannelId({ channelId: this.channelId });
 
     await Promise.all([this.fetchChannel(), this.queryMessages()]);
+
+    this.intervalId = setInterval(() => this.queryMessages(), 30 * 1000);
+  },
+
+  destroyed() {
+    clearInterval(this.intervalId);
   },
 
   methods: {
