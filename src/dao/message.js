@@ -13,8 +13,7 @@ export default {
     return response.data;
   },
 
-  // eslint-disable-next-line no-unused-vars
   async delete(id) {
-    // 何もしない
+    await api.delete(`messages/${id}`);
   }
 };
