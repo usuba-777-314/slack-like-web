@@ -4,7 +4,7 @@
     :messages="messages"
     :form="messageForm"
     @sendMessage="sendMessage"
-    @deleteMessage="deleteMessage({ message: $event })"
+    @deleteMessage="deleteMessageIfNeeded({ message: $event })"
     @updateMessageFormText="setMessageFormText({ text: $event })"
   />
 </template>
@@ -60,7 +60,17 @@ export default {
       "setMessageFormText",
       "sendMessage",
       "deleteMessage"
-    ])
+    ]),
+
+    ...mapActions("modals/client/messageDelete", {
+      openMessageDeleteModal: "open"
+    }),
+
+    deleteMessageIfNeeded({ message }) {
+      this.openMessageDeleteModal({ message }).then(() =>
+        this.deleteMessage({ message })
+      );
+    }
   }
 };
 </script>
