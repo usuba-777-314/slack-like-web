@@ -9,21 +9,17 @@
         <slot />
       </main>
     </div>
-
-    <MessageDeleteModal />
   </div>
 </template>
 
 <script>
 import TopNav from "@/components/organisms/client/topNav/TopNav";
 import Sidebar from "@/components/organisms/client/sidebar/Sidebar";
-import MessageDeleteModal from "@/components/organisms/client/modals/messageDelete/MessageDeleteModal";
 
 export default {
   components: {
     TopNav,
-    Sidebar,
-    MessageDeleteModal
+    Sidebar
   }
 };
 </script>

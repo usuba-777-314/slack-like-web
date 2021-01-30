@@ -8,6 +8,8 @@
       @updateText="updateMessageFormText"
       @send="sendMessage"
     />
+
+    <MessageDeleteModal />
   </div>
 </template>
 
@@ -15,12 +17,14 @@
 import ChannelHeader from "@/components/organisms/client/channel/ChannelHeader";
 import MessageList from "@/components/organisms/client/chat/MessageList";
 import MessageForm from "@/components/organisms/client/chat/MessageForm";
+import MessageDeleteModal from "@/components/organisms/client/modals/messageDelete/MessageDeleteModal";
 
 export default {
   components: {
     ChannelHeader,
     MessageList,
-    MessageForm
+    MessageForm,
+    MessageDeleteModal
   },
 
   props: {
