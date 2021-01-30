@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import ClientView from "@/views/client/ClientView";
-import Home from "../views/Home.vue";
+import ChannelView from "@/views/client/channels/ChannelView";
 
 Vue.use(VueRouter);
 
@@ -12,18 +12,10 @@ const routes = [
 
     children: [
       {
-        path: "/",
-        name: "Home",
-        component: Home
-      },
-      {
-        path: "about",
-        name: "About",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-          import(/* webpackChunkName: "about" */ "../views/About.vue")
+        path: "channels/:channelId(\\d+)",
+        name: "ChannelView",
+        component: ChannelView,
+        props: true
       }
     ]
   }

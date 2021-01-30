@@ -1,11 +1,22 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
+import channelPage from "@/store/client/channels/channelPage";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {}
+  modules: {
+    client: {
+      namespaced: true,
+      modules: {
+        channels: {
+          namespaced: true,
+          modules: {
+            channelPage
+          }
+        }
+      }
+    }
+  }
 });
